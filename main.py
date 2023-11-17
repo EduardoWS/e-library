@@ -246,35 +246,36 @@ class Window1():
 
             
             # widgets
-            font_entry = ctk.CTkFont(family=FONT, size=18, weight='bold')
+            font_label = ctk.CTkFont(family=FONT, size=18, weight='bold')
+            font_entry = ctk.CTkFont(family=FONT, size=15)
             
-            title_label = ctk.CTkLabel(master=main_frame, text='Título:', text_color=WHITE, font=font_entry,
+            title_label = ctk.CTkLabel(master=main_frame, text='Título:', text_color=WHITE, font=font_label,
                                     #    fg_color=LIGHT_BLUE,
                                        corner_radius=20)
-            title_label.grid(column=0, row=2, sticky='nsw', pady=5, padx=5)
+            title_label.grid(column=0, row=2, sticky='nsw', pady=3, padx=5)
             
             # title_entry = ctk.CTkEntry(master=title_frame, font=font_entry,
             #                            border_color=LIGHT_BLUE, height=20,
             #                            placeholder_text='Digite o título do livro')
             title_entry = ttk.Entry(main_frame, font=font_entry, 
                                     foreground=WHITE, style='primary', width=40)
-            title_entry.grid(column=1, columnspan=3, row=2, sticky='nsw', pady=5, padx=5)
+            title_entry.grid(column=1, columnspan=3, row=2, sticky='nsw', pady=3, padx=5)
             
             
-            author_label = ctk.CTkLabel(master=main_frame, text='Autor:', text_color=WHITE, font=font_entry,
+            author_label = ctk.CTkLabel(master=main_frame, text='Autor:', text_color=WHITE, font=font_label,
                                     #    fg_color=LIGHT_BLUE,
                                        corner_radius=20)
-            author_label.grid(column=0, row=3, sticky='nsw', pady=5, padx=5)
+            author_label.grid(column=0, row=3, sticky='nsw', pady=3, padx=5)
             # author_entry = ctk.CTkEntry(master=author_frame, font=font_entry,
             #                            border_color=LIGHT_BLUE, height=20)
             author_entry = ttk.Entry(main_frame, font=font_entry,
                                     foreground=WHITE, style='primary', width=40)
-            author_entry.grid(column=1, columnspan=3, row=3, sticky='nsw', pady=5, padx=5)
+            author_entry.grid(column=1, columnspan=3, row=3, sticky='nsw', pady=3, padx=5)
             
             
             
             book_readed = tk.BooleanVar(value=False)
-            readed_label = ctk.CTkLabel(master=main_frame, text='Lido:', text_color=WHITE, font=font_entry,
+            readed_label = ctk.CTkLabel(master=main_frame, text='Lido:', text_color=WHITE, font=font_label,
                                     #    fg_color=LIGHT_BLUE,
                                        corner_radius=20)
             readed_label.grid(column=0, row=4, sticky='nsw', pady=5, padx=5)
@@ -286,7 +287,7 @@ class Window1():
             separator = ttk.Separator(main_frame, orient='horizontal')
             separator.grid(column=0, columnspan=4, row=5, sticky='nsew', pady=5, padx=5)
             
-            year_label = ctk.CTkLabel(master=hide_frame, text='Ano:', text_color=WHITE, font=font_entry,
+            year_label = ctk.CTkLabel(master=hide_frame, text='Ano:', text_color=WHITE, font=font_label,
                                 #    fg_color=LIGHT_BLUE,
                                 corner_radius=20)
             year_int = tk.IntVar(value=date.today().year)
@@ -297,12 +298,12 @@ class Window1():
                                     )
             obs_label = ctk.CTkLabel(master=hide_frame, text='*ano em que você terminou a leitura', 
                                         text_color=WHITE, font=font_entry,)
-            year_label.grid(column=0, row=0, sticky='nsw', pady=5, padx=5)
-            year_spin.grid(column=1, row=0, sticky='nsew', pady=5, padx=5)
-            obs_label.grid(column=2, columnspan=3, row=0, sticky='nsew', pady=5, padx=5)
+            year_label.grid(column=0, row=0, sticky='nsw', pady=7, padx=0)
+            year_spin.grid(column=1, row=0, sticky='nsw', pady=7, padx=0)
+            obs_label.grid(column=2, columnspan=3, row=0, sticky='nsw', pady=10, padx=2)
             
             
-            review_label = ctk.CTkLabel(master=hide_frame, text='Nota:', text_color=WHITE, font=font_entry,
+            review_label = ctk.CTkLabel(master=hide_frame, text='Nota:', text_color=WHITE, font=font_label,
                                         corner_radius=20)
             review_int = tk.IntVar(value = 0)
             review_spin = ttk.Spinbox(hide_frame, from_ = 0,
@@ -310,8 +311,26 @@ class Window1():
                                     style='primary', foreground=WHITE,
                                     increment = 1, textvariable = review_int,
                                     )
-            review_label.grid(column=0, row=1, sticky='nsw', pady=5, padx=5)
-            review_spin.grid(column=1, row=1, sticky='nsew', pady=5, padx=5)
+            review_label.grid(column=0, row=1, sticky='nsw', pady=7, padx=0)
+            review_spin.grid(column=1, row=1, sticky='nsw', pady=7, padx=0)
+            
+            
+            
+            
+            save_button = ctk.CTkButton(master=main_frame, text='Salvar',
+                                        fg_color=LIGHT_BLUE,
+                                        text_color=BLACK,
+                                        font=font_label,
+                                        corner_radius=20)
+            save_button.grid(column=2, row=9, sticky='nsew', pady=5, padx=5)
+            
+            cancel_button = ctk.CTkButton(master=main_frame, text='Cancelar',
+                                        fg_color=LIGHT_BLUE,
+                                        text_color=BLACK,
+                                        font=font_label,
+                                        corner_radius=20,
+                                        command= self.on_window_close)
+            cancel_button.grid(column=1, row=9, sticky='nsew', pady=5, padx=5)
             
 
             
