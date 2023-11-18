@@ -254,11 +254,12 @@ class Window1():
                                        corner_radius=20)
             title_label.grid(column=0, row=2, sticky='nsw', pady=3, padx=5)
             
-            # title_entry = ctk.CTkEntry(master=title_frame, font=font_entry,
-            #                            border_color=LIGHT_BLUE, height=20,
-            #                            placeholder_text='Digite o título do livro')
-            title_entry = ttk.Entry(main_frame, font=font_entry, 
-                                    foreground=WHITE, style='primary', width=40)
+            title_entry = ctk.CTkEntry(master=main_frame, font=font_entry,
+                                       border_color=LIGHT_BLUE, height=20, width=300,
+                                       corner_radius=3, border_width=1,
+                                       placeholder_text='Digite o título do livro')
+            # title_entry = ttk.Entry(main_frame, font=font_entry, background=LIGHT_BLUE,
+            #                         foreground=WHITE, style='primary', width=40)
             title_entry.grid(column=1, columnspan=3, row=2, sticky='nsw', pady=3, padx=5)
             
             
@@ -266,22 +267,29 @@ class Window1():
                                     #    fg_color=LIGHT_BLUE,
                                        corner_radius=20)
             author_label.grid(column=0, row=3, sticky='nsw', pady=3, padx=5)
-            # author_entry = ctk.CTkEntry(master=author_frame, font=font_entry,
-            #                            border_color=LIGHT_BLUE, height=20)
-            author_entry = ttk.Entry(main_frame, font=font_entry,
-                                    foreground=WHITE, style='primary', width=40)
+            author_entry = ctk.CTkEntry(master=main_frame, font=font_entry,
+                                       border_color=LIGHT_BLUE, height=20, width=300,
+                                       corner_radius=3, border_width=1,
+                                       placeholder_text='Digite o nome do autor')
+            # author_entry = ttk.Entry(main_frame, font=font_entry,
+            #                         foreground=WHITE, style='primary', width=40)
             author_entry.grid(column=1, columnspan=3, row=3, sticky='nsw', pady=3, padx=5)
             
             
             
-            book_readed = tk.BooleanVar(value=False)
+            # book_readed = tk.BooleanVar(value=False)
+            book_readed = ctk.BooleanVar(value=False)
             readed_label = ctk.CTkLabel(master=main_frame, text='Lido:', text_color=WHITE, font=font_label,
                                     #    fg_color=LIGHT_BLUE,
                                        corner_radius=20)
             readed_label.grid(column=0, row=4, sticky='nsw', pady=5, padx=5)
-            readed_toggle = ttk.Checkbutton(main_frame, bootstyle = 'primary-round-toggle',
+            readed_toggle = ctk.CTkSwitch(master=main_frame, progress_color=LIGHT_BLUE,
+                                            text='',
                                             offvalue=False, onvalue=True, variable=book_readed,
                                             command=lambda: self.func_book_readed(book_readed, hide_frame))
+            # readed_toggle = ttk.Checkbutton(main_frame, bootstyle = 'primary-round-toggle',
+            #                                 offvalue=False, onvalue=True, variable=book_readed,
+            #                                 command=lambda: self.func_book_readed(book_readed, hide_frame))
             readed_toggle.grid(column=1, row=4, pady=5, padx=5, sticky='w')
             
             separator = ttk.Separator(main_frame, orient='horizontal')
@@ -296,12 +304,14 @@ class Window1():
                                     style='primary', foreground=WHITE,
                                     increment = 1, textvariable = year_int,
                                     )
-            obs_label = ctk.CTkLabel(master=hide_frame, text='*ano em que você terminou a leitura', 
-                                        text_color=WHITE, font=font_entry,)
+            obs_label = ctk.CTkLabel(master=hide_frame, text='*Ano de conclusão da leitura.', 
+                                        text_color=WHITE, font=font_entry)
             year_label.grid(column=0, row=0, sticky='nsw', pady=7, padx=0)
-            year_spin.grid(column=1, row=0, sticky='nsw', pady=7, padx=0)
-            obs_label.grid(column=2, columnspan=3, row=0, sticky='nsw', pady=10, padx=2)
+            year_spin.grid(column=1, row=0, sticky='w', pady=7, padx=0)
+            obs_label.grid(column=1, columnspan=3, row=0, sticky='e', pady=7, padx=5)
             
+            # frame_teste = ctk.CTkFrame(master=hide_frame, fg_color=WHITE)
+            # frame_teste.grid(column=1, row=0, sticky='nsw', pady=0, padx=0)
             
             review_label = ctk.CTkLabel(master=hide_frame, text='Nota:', text_color=WHITE, font=font_label,
                                         corner_radius=20)
