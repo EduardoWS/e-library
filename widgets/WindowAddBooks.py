@@ -6,8 +6,8 @@ from .WindowSlideBooks import WindowSlideBooks
 
        
 class WindowAddBooks():
-    def __init__(self):
-        
+    def __init__(self, scroll_frame):
+        self.scroll_frame = scroll_frame
         if not WindowSlideBooks.bool_window:
             global extra
             extra = ctk.CTkToplevel(fg_color=(WHITE, BLACK_BACKGROUND))
@@ -227,6 +227,8 @@ class WindowAddBooks():
             
             # Fechar a conexão
             conn.close()
+            
+            WindowSlideBooks.show_books(self, self.scroll_frame)
             
             # Fechar a janela extra
             self.on_window_close()

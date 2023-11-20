@@ -82,12 +82,14 @@ class WindowSlideBooks():
         
         self.show_books(scroll_frame)
         
+       
+        
         
         
         # add book button
         from .WindowAddBooks import WindowAddBooks
         add_book = ctk.CTkButton(master=main_frame, text='+', 
-                                command=WindowAddBooks,
+                                command=lambda: WindowAddBooks(scroll_frame),
                                 fg_color=LIGHT_BLUE,
                                 text_color=BLACK,
                                 font=font_buttons,
@@ -97,8 +99,16 @@ class WindowSlideBooks():
         add_book.place(relx=0.5, rely=0.9425, anchor='center')
         
         
+        
+        
+        
     
     def show_books(self, scroll_frame):
+        # limpar frame
+        for widget in scroll_frame.winfo_children():
+            widget.destroy()
+        
+        
         # mostrar livros cadastrados no banco de dados
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
@@ -112,5 +122,9 @@ class WindowSlideBooks():
             autor = ctk.StringVar(value=livro[2])
             ctk.CTkLabel(scroll_frame, text=f'{titulo.get()} - {autor.get()}', font=font, 
                          text_color=WHITE, fg_color=DARK_GRAY, corner_radius=20).pack(pady=10, padx=10, anchor='w', )
+        
+        
+    
+    
             
             

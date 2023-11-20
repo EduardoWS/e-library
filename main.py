@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 from datetime import date
 import sqlite3
 from widgets.Widgets import Widgets
+from widgets.WindowSlideBooks import WindowSlideBooks
 import darkdetect
 try:
     from ctypes import wintypes, byref, sizeof, c_int, windll
@@ -35,6 +36,7 @@ class App(ctk.CTk):
         
         # widgets
         Widgets(self)
+        
         
         self.mainloop()
     
