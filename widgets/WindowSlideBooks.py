@@ -43,8 +43,10 @@ class WindowSlideBooks():
         
         scroll_frame = ctk.CTkScrollableFrame(middle_frame, fg_color=BLACK, corner_radius=20)
         scroll_frame.grid(column=0, row=1, sticky='nsew', pady=10, padx=10)
-        scroll_frame.columnconfigure(0, weight=1, uniform='d')
-        scroll_frame.rowconfigure((0,1,2,3,4,5,6,7), weight=1, uniform='d')
+        scroll_frame.columnconfigure(0, weight=5, uniform='d')
+        scroll_frame.columnconfigure(1, weight=1, uniform='d')
+        scroll_frame.columnconfigure(2, weight=2, uniform='d')
+        scroll_frame.rowconfigure((0,1,2,3,4), weight=1, uniform='d')
         
         self.scroll_frame = scroll_frame
         
@@ -130,30 +132,28 @@ class WindowSlideBooks():
         conn.close()
         
         font = ctk.CTkFont(family=FONT, size=18)
-        for livro in livros:
+       
+        for i, livro in enumerate(livros):
             if livro[3] == None:
-                # ctk.CTkLabel(scroll_frame, text=f'{livro[1]} - {livro[2]}', font=font, 
-                #              height=40,
-                #             text_color=WHITE, fg_color=DARK_GRAY, corner_radius=20).pack(pady=10, padx=10, 
-                #                                                                          anchor='w', fill='y', 
-                #                                                                          )
+               
+                ctk.CTkLabel(scroll_frame, text=f'{livro[1]} - {livro[2]}', font=font, 
+                             height=40,
+                            text_color=WHITE, fg_color=DARK_GRAY, corner_radius=20).grid(row = i, pady=10, padx=10,
+                                                                                            sticky='nsew')
             else:
-                # ctk.CTkLabel(scroll_frame, text=f'{livro[1]} - {livro[2]}', font=font, 
-                #              height=40,
-                #             text_color=LIGHT_BLUE, fg_color=DARK_GRAY, corner_radius=20).pack(side='left', pady=10, padx=10, 
-                #                                                                               anchor='w', fill='y',
-                #                                                                               )
-                # ctk.CTkLabel(scroll_frame, text=f'{livro[3]}', font=font, height=40,
-                #             text_color=LIGHT_BLUE, fg_color=DARK_GRAY, corner_radius=20).pack(side='left', pady=10, padx=0, 
-                #                                                                               anchor='w', fill='y',
-                #                                                                               )
+                
+                ctk.CTkLabel(scroll_frame, text=f'{livro[1]} - {livro[2]}', font=font, 
+                             height=40,
+                            text_color=LIGHT_BLUE, fg_color=DARK_GRAY, corner_radius=20).grid(column=0, row=i, pady=10, padx=10,
+                                                                                            sticky='nsew')
+                ctk.CTkLabel(scroll_frame, text=f'{livro[3]}', font=font, height=40,
+                            text_color=LIGHT_BLUE, fg_color=DARK_GRAY, corner_radius=20).grid(column=1, row=i, pady=10, padx=0,
+                                                                                            sticky='nsew')
                 nota = " ★ " * livro[4]
                 
-                # ctk.CTkLabel(scroll_frame, text=f'{nota}', font=font, height=40,
-                #             text_color=LIGHT_BLUE, fg_color=DARK_GRAY, corner_radius=20).pack(side='left', pady=10, padx=10, 
-                #                                                                               anchor='w', fill='y',
-                #                                                                               )
-        
+                ctk.CTkLabel(scroll_frame, text=f'{nota}', font=font, height=40,
+                            text_color=LIGHT_BLUE, fg_color=DARK_GRAY, corner_radius=20).grid(column=2, row=i, pady=10, padx=10,
+                                                                                            sticky='nsew')
         
     
     
