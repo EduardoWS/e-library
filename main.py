@@ -66,7 +66,11 @@ class App(ctk.CTk):
             CREATE TABLE IF NOT EXISTS livros (
                 id INTEGER PRIMARY KEY,
                 titulo TEXT NOT NULL,
-                autor TEXT NOT NULL
+                autor TEXT NOT NULL,
+                ano TEXT,
+                nota INTEGER,
+                status INTEGER NOT NULL
+                
             )
         ''')
         

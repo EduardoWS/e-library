@@ -108,15 +108,19 @@ class WindowAddBooks():
                                             text='',
                                             offvalue=False, onvalue=True, variable=book_readed,
                                             command=lambda: self.func_book_readed(book_readed, hide_frame))
-          
             readed_toggle.grid(column=1, row=4, pady=5, padx=5, sticky='w')
             
-            # separator = ttk.Separator(main_frame, orient='horizontal')
-            # separator.grid(column=0, columnspan=4, row=5, sticky='nsew', pady=5, padx=5)
+
+
+
             separator = ctk.CTkLabel(master=main_frame, text='__________________________________________________________',
                                     text_color=GRAY, font=font_label,
                                     corner_radius=20)
             separator.grid(column=0, columnspan=4, row=5, sticky='nsew', pady=5, padx=5)
+            
+            
+            
+            
             
             year_label = ctk.CTkLabel(master=hide_frame, text='Ano:', text_color=(BLACK, WHITE), font=font_label,
                                 #    fg_color=LIGHT_BLUE,
@@ -141,11 +145,9 @@ class WindowAddBooks():
             review_label = ctk.CTkLabel(master=hide_frame, text='Nota:', text_color=(BLACK, WHITE), font=font_label,
                                         corner_radius=20)
            
-            #TODO: Criar um widget para avaliação do livro de 0 a 5
+           
             font_stars = ctk.CTkFont(family=FONT, size=26, weight='bold')
-            
-            
-            
+            self.nota = 5
             
             self.button_star1 = ctk.CTkButton(master=hide_frame, text='★', fg_color='transparent',
                                               hover=False,
@@ -187,7 +189,7 @@ class WindowAddBooks():
                                         text_color=BLACK,
                                         font=font_label,
                                         width=90,
-                                        command=lambda: self.salvar_livro(title_entry, author_entry),
+                                        command=lambda: self.salvar_livro(title_entry, author_entry, book_readed.get(), year_str.get(), self.nota),
                                         corner_radius=20)
             save_button.grid(column=2, row=9, sticky='nsew', pady=5, padx=5)
             
@@ -215,17 +217,27 @@ class WindowAddBooks():
             # TODO: Emitir um alerta de que a janela já está aberta
             pass
     
-    def salvar_livro(self, title_entry, author_entry):
+    def salvar_livro(self, title_entry, author_entry, book_readed, year_str, nota):
         # Obter os dados do título e autor dos widgets
         titulo = title_entry.get()
         autor = author_entry.get()
+        status = 0 # 0: não lido, 1: lido
 
         # Verificar se ambos título e autor estão preenchidos
         if titulo and autor:
             # Inserir dados na tabela
             conn = sqlite3.connect('database.db')
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO livros (titulo, autor) VALUES (?, ?)", (titulo, autor))
+            if not book_readed:
+                year_str = None
+                nota = None
+                status = 0
+                cursor.execute("INSERT INTO livros (titulo, autor, ano, nota, status) VALUES (?, ?, ?, ?, ?)", (titulo, autor, year_str, nota, status))
+            else:
+                if year_str and nota:
+                    status = 1
+                    cursor.execute("INSERT INTO livros (titulo, autor, ano, nota, status) VALUES (?, ?, ?, ?, ?)", (titulo, autor, year_str, nota, status))
+                    
             
             # # Confirmar as alterações no banco de dados
             conn.commit()
@@ -238,6 +250,7 @@ class WindowAddBooks():
             # Limpar os widgets
             title_entry.delete(0, 'end')
             author_entry.delete(0, 'end')
+            self.change_color(star=5)
             
             # Limpar foco
             self.text_top.focus()
@@ -274,30 +287,35 @@ class WindowAddBooks():
                 self.button_star3.configure(text_color=BLACK)
                 self.button_star4.configure(text_color=BLACK)
                 self.button_star5.configure(text_color=BLACK)
+                self.nota = 1
             elif star == 2:
                 self.button_star1.configure(text_color=LIGHT_BLUE)
                 self.button_star2.configure(text_color=LIGHT_BLUE)
                 self.button_star3.configure(text_color=BLACK)
                 self.button_star4.configure(text_color=BLACK)
                 self.button_star5.configure(text_color=BLACK)
+                self.nota = 2
             elif star == 3:
                 self.button_star1.configure(text_color=LIGHT_BLUE)
                 self.button_star2.configure(text_color=LIGHT_BLUE)
                 self.button_star3.configure(text_color=LIGHT_BLUE)
                 self.button_star4.configure(text_color=BLACK)
                 self.button_star5.configure(text_color=BLACK)
+                self.nota = 3
             elif star == 4:
                 self.button_star1.configure(text_color=LIGHT_BLUE)
                 self.button_star2.configure(text_color=LIGHT_BLUE)
                 self.button_star3.configure(text_color=LIGHT_BLUE)
                 self.button_star4.configure(text_color=LIGHT_BLUE)
                 self.button_star5.configure(text_color=BLACK)
+                self.nota = 4
             elif star == 5:
                 self.button_star1.configure(text_color=LIGHT_BLUE)
                 self.button_star2.configure(text_color=LIGHT_BLUE)
                 self.button_star3.configure(text_color=LIGHT_BLUE)
                 self.button_star4.configure(text_color=LIGHT_BLUE)
                 self.button_star5.configure(text_color=LIGHT_BLUE)
+                self.nota = 5
                 
         
         self.button_star1.grid(column=1, row=1, sticky='w')
