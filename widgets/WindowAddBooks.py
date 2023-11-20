@@ -10,7 +10,7 @@ class WindowAddBooks():
         
         if not WindowSlideBooks.bool_window:
             global extra
-            extra = ctk.CTkToplevel(fg_color=(WHITE, DARK_GRAY))
+            extra = ctk.CTkToplevel(fg_color=(WHITE, BLACK_BACKGROUND))
             extra.title('')
             # iniciar tela no centro
             widht_screen = extra.winfo_screenwidth()
@@ -74,6 +74,7 @@ class WindowAddBooks():
             
             title_entry = ctk.CTkEntry(master=main_frame, font=font_entry,
                                        border_color=LIGHT_BLUE, height=20, width=300,
+                                       fg_color=BLACK,
                                        corner_radius=3, border_width=1,
                                        placeholder_text='Digite o título do livro')
            
@@ -86,6 +87,7 @@ class WindowAddBooks():
             author_label.grid(column=0, row=3, sticky='nsw', pady=3, padx=5)
             author_entry = ctk.CTkEntry(master=main_frame, font=font_entry,
                                        border_color=LIGHT_BLUE, height=20, width=300,
+                                       fg_color=BLACK,
                                        corner_radius=3, border_width=1,
                                        placeholder_text='Digite o nome do autor')
            
@@ -120,6 +122,7 @@ class WindowAddBooks():
             year_str = ctk.StringVar(value=str(date.today().year))
             year_entry = ctk.CTkEntry(master=hide_frame, font=font_entry,
                                         border_color=LIGHT_BLUE, height=20, width=100,
+                                        fg_color=BLACK,
                                         corner_radius=3, border_width=1,
                                         textvariable=year_str)
            

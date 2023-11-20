@@ -5,6 +5,7 @@ from .SlidePanel import *
 from .WindowAddBooks import WindowSlideBooks
 
 class Widgets():
+   
     def __init__(self, parent):
         
         # layout
@@ -12,9 +13,12 @@ class Widgets():
         parent.columnconfigure(1, weight=3, uniform='a')
         parent.rowconfigure((0,1,2,3,4,5,6), weight=1, uniform='a')
         
+        self.frames(parent)
+        
+    def frames(self, parent):
         # fonts
         font = ctk.CTkFont(family=FONT, size=MAIN_TEXT_SIZE, weight='bold')
-        
+        font_buttons = ctk.CTkFont(family=FONT, size=24, weight='bold')
         # frames
         main_frame = ctk.CTkFrame(parent, fg_color=LIGHT_BLUE, corner_radius=20)
         main_frame.grid(column=1, row=0, rowspan=2, sticky='new', padx=80, pady=40)
@@ -25,12 +29,8 @@ class Widgets():
         text_logo.pack(expand=True, fill='both', padx=30, pady=30)
         
 
-        
 
-        
-        
         # buttons
-        font_buttons = ctk.CTkFont(family=FONT, size=24, weight='bold')
         frame_buttons = ctk.CTkFrame(master=parent, fg_color=(WHITE, GRAY))
         frame_buttons.grid(column=0, row=0, rowspan=7, sticky='nsew')
         frame_buttons.columnconfigure(0, weight=1, uniform='f')
@@ -39,22 +39,15 @@ class Widgets():
         self.parent = parent
         self.frame_buttons = frame_buttons
         
-        window_slide = self.Animated_WindowSlideBooks()
         
-        # book_image = Image.open('apps/e-library/images/open-book_1f4d6.png')
-        # book_ctk = ctk.CTkImage(book_image, size=(30,30))
         
-        # money_image = Image.open('apps/e-library/images/money-bag_1f4b0.png')
-        # money_ctk = ctk.CTkImage(money_image, size=(30,30))
+        self.flag_selected_button = False
+        animated_panel = SlidePanel(self.parent, 1.0, 0.25)
         
-        # pin_image = Image.open('apps/e-library/images/pushpin_1f4cc.png')
-        # pin_ctk = ctk.CTkImage(pin_image, size=(30,30))
-        
- 
         
         # button1
-        button1 = ctk.CTkButton(master=frame_buttons, text=' Meus Livros', 
-                                command= window_slide.animate,
+        self.button1 = ctk.CTkButton(master=frame_buttons, text=' Meus Livros', 
+                                command= lambda: self.slide_panel(animated_panel),
                                 border_spacing=10,
                                 fg_color='transparent',
                                 text_color=(BLACK, LIGHT_BLUE),
@@ -64,7 +57,7 @@ class Widgets():
                                 anchor='w',
                                 #image=book_ctk
                                 )
-        button1.grid(column=0, row=2, sticky='ew')
+        self.button1.grid(column=0, row=2, sticky='ew')
         #button1.place(relx=0.5, rely=0.10, relwidth = 1, relheight = 0.1, anchor='center')
        
         
@@ -108,12 +101,14 @@ class Widgets():
                                 )
         #button4.place(relx=0.5, rely=0.9, relwidth = 1, relheight = 0.1, anchor='center')
         
-        
-
-    def Animated_WindowSlideBooks(self):
-        # animated widget
-        animated_panel = SlidePanel(self.parent, 1.0, 0.25, self.frame_buttons)
-        
+    def slide_panel(self, animated_panel):
         WindowSlideBooks(animated_panel)
-        
-        return animated_panel
+        animated_panel.animate()
+        if not self.flag_selected_button:
+            self.button1.configure(fg_color=BLACK)
+            self.flag_selected_button = True
+        else:
+            self.button1.configure(fg_color='transparent')
+            self.flag_selected_button = False
+    
+    
