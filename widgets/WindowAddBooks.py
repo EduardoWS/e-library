@@ -59,8 +59,8 @@ class WindowAddBooks():
             # widgets
             
             font_top = ctk.CTkFont(family=FONT, size=22, weight='bold')
-            text_top = ctk.CTkLabel(master=main_frame, text='Adicionar Livro', text_color=LIGHT_BLUE, font=font_top,)
-            text_top.grid(column=0, columnspan=2, row=0, sticky='nsw', pady=5, padx=15)
+            self.text_top = ctk.CTkLabel(master=main_frame, text='Adicionar Livro', text_color=LIGHT_BLUE, font=font_top,)
+            self.text_top.grid(column=0, columnspan=2, row=0, sticky='nsw', pady=5, padx=15)
             
             
             font_label = ctk.CTkFont(family=FONT, size=16, weight='bold')
@@ -76,10 +76,13 @@ class WindowAddBooks():
                                        border_color=LIGHT_BLUE, height=20, width=300,
                                        fg_color=BLACK,
                                        corner_radius=3, border_width=1,
-                                       placeholder_text='Digite o título do livro')
+                                       placeholder_text='Digite o título do livro',
+                                       )
            
             title_entry.grid(column=1, columnspan=3, row=2, sticky='nsw', pady=3, padx=5)
             
+            
+        
             
             author_label = ctk.CTkLabel(master=main_frame, text='Autor:', text_color=(BLACK, WHITE), font=font_label,
                                     #    fg_color=LIGHT_BLUE,
@@ -199,7 +202,9 @@ class WindowAddBooks():
             
 
             
-    
+            # Adicione um rótulo temporário para mostrar a mensagem de sucesso
+            self.success_label = ctk.CTkLabel(master=main_frame, text='', text_color=LIGHT_BLUE, font=font_label)
+            self.success_label.place(relx=0.075, rely=0.975, anchor='sw')
             
             WindowSlideBooks.bool_window = True
             
@@ -230,8 +235,28 @@ class WindowAddBooks():
             
             WindowSlideBooks.show_books(self, self.scroll_frame)
             
-            # Fechar a janela extra
-            self.on_window_close()
+            # Limpar os widgets
+            title_entry.delete(0, 'end')
+            author_entry.delete(0, 'end')
+            
+            # Limpar foco
+            self.text_top.focus()
+            
+           
+            
+            # Mostrar uma mensagem de sucesso
+            try:
+                import threading
+                self.success_label.configure(text='Livro salvo com sucesso!')
+                # Inicie uma thread para limpar a mensagem após alguns segundos
+                threading.Timer(5, self.clear_success_message).start()
+            except:
+                pass
+            
+            
+    def clear_success_message(self):
+        # Limpar a mensagem de sucesso
+        self.success_label.configure(text='')
     
     
     def change_color(self, star=None):
