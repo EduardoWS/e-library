@@ -10,7 +10,7 @@ class WindowAddBooks():
         
         if not WindowSlideBooks.bool_window:
             global extra
-            extra = ctk.CTkToplevel()
+            extra = ctk.CTkToplevel(fg_color=(WHITE, DARK_GRAY))
             extra.title('')
             # iniciar tela no centro
             widht_screen = extra.winfo_screenwidth()
@@ -19,7 +19,12 @@ class WindowAddBooks():
             y = int(height_screen/2 - 400/2)
             extra.geometry(f'500x400+{x}+{y}')
             extra.resizable(False, False)
-            # print(extra.attributes())
+            
+            extra.iconbitmap("images/favicon.ico")
+            
+            
+           
+            
             extra.attributes('-topmost', 'true') # o topmost faz com que a janela fique sempre em primeiro plano
             
             # layout
@@ -41,7 +46,7 @@ class WindowAddBooks():
             back_ground_frame.columnconfigure((0,1,2,3), weight=1, uniform='d')
             back_ground_frame.rowconfigure((0,1,2,3), weight=1, uniform='d')
             
-            hide_frame = ctk.CTkFrame(master=main_frame, fg_color=(WHITE, DARK_GRAY))
+            hide_frame = ctk.CTkFrame(master=main_frame, fg_color=(WHITE, GRAY))
             hide_frame.columnconfigure(0, weight=1, uniform='d')
             hide_frame.columnconfigure((1,2,3,4,5,6), weight=1, uniform='d')
             hide_frame.rowconfigure((0,1,2), weight=1, )
@@ -104,7 +109,7 @@ class WindowAddBooks():
             # separator = ttk.Separator(main_frame, orient='horizontal')
             # separator.grid(column=0, columnspan=4, row=5, sticky='nsew', pady=5, padx=5)
             separator = ctk.CTkLabel(master=main_frame, text='__________________________________________________________',
-                                    text_color=DARK_GRAY, font=font_label,
+                                    text_color=GRAY, font=font_label,
                                     corner_radius=20)
             separator.grid(column=0, columnspan=4, row=5, sticky='nsew', pady=5, padx=5)
             
@@ -122,7 +127,7 @@ class WindowAddBooks():
                                         text_color=(BLACK, WHITE), font=font_entry)
             year_label.grid(column=0, row=0, sticky='nsw', pady=7, padx=0)
             year_entry.grid(column=1, row=0, pady=7, padx=0)
-            obs_label.grid(column=2, columnspan=3, row=0, sticky='w', pady=7, padx=10)
+            obs_label.grid(column=2, columnspan=5, row=0, sticky='w', pady=7, padx=10)
             
             # frame_teste = ctk.CTkFrame(master=hide_frame, fg_color=(BLACK, WHITE))
             # frame_teste.grid(column=1, row=0, sticky='nsw', pady=0, padx=0)

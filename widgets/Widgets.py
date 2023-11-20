@@ -31,7 +31,7 @@ class Widgets():
         
         # buttons
         font_buttons = ctk.CTkFont(family=FONT, size=24, weight='bold')
-        frame_buttons = ctk.CTkFrame(master=parent, fg_color=(WHITE, DARK_GRAY))
+        frame_buttons = ctk.CTkFrame(master=parent, fg_color=(WHITE, GRAY))
         frame_buttons.grid(column=0, row=0, rowspan=7, sticky='nsew')
         frame_buttons.columnconfigure(0, weight=1, uniform='f')
         frame_buttons.rowconfigure((0,1,2,3,4,5,6,7,8,9), weight=1, uniform='f')

@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from settings import *
 
 class SlidePanel(ctk.CTkFrame):
     def __init__(self, parent, start_pos, end_pos, frame_buttons):
@@ -9,6 +10,8 @@ class SlidePanel(ctk.CTkFrame):
         self.start_pos = start_pos 
         self.end_pos = end_pos 
         self.width = abs(start_pos - end_pos)
+        
+        self.configure(fg_color=DARK_GRAY)
 
         # animation logic
         self.pos = self.start_pos
